@@ -3,7 +3,6 @@
 function getComputerChoice(){  
     let arr = [ "rock", "scissor", "paper"];/* create an array with the output we want to have*/
     let pcOut = arr[Math.floor(Math.random() * arr.length)]; /*randomize the output*/
-    console.log("Result:", pcOut); /*check the output*/
     return pcOut;
  }
 
@@ -15,15 +14,58 @@ function restart(){
  function playerSelection(){                
     let playerSelection = prompt("Insert your selection");    /*ask the user to input his choice*/
     let player = playerSelection.toLowerCase();               /*transform the string all in lowercase */ 
-    console.log(player);                                            
     if((player === "rock") || (player === "paper") || (player === "scissor")){  /*check if the entered choice is good*/
-        console.log (player);
-        return player;
+    return player;
     }
     else{
         alert("enter a valid choice!"); /*if not let the user enter another choice*/
         restart(); 
     }
 }
+let result = "";
+function playRound(){
+    const pc = getComputerChoice();
+    const player = playerSelection();
+    
+    console.log("pc:" + pc);
+    
+    if(pc===player){ /*if we give the same input as the pc it's a draw else it start the calculation */
+        let result = "draw";
+        return (result);
+    }
+    else{
+        switch (player){ /*compare our input with the pc output and choose the winner*/
+            case "rock": pc === "paper" ? result = "loss"  : result = "win"; 
+            return (result);
+            break;
+        
+            case "paper": pc === "scissor" ? result = "loss"  : result = "win"; 
+            return (result);
+            break;
 
-playerSelection();
+            case "scissor": pc === "rock" ? result = "loss"  : result = "win"; 
+            return (result);
+            break;    
+        }
+    } 
+}  
+let playerScore = 0;
+let pcScore = 0;
+function game(){
+    for(let i = 0; i<5;i++){
+        playRound();
+        if (result === "win"){
+            playerScore++;
+            console.log("You win!");            
+        }
+        else if (result === "loss"){
+            pcScore++;
+            console.log("you lose!");
+        }
+        else{
+            console.log("it's a draw!");
+        }
+    }
+    console.log("pc:"+pcScore, "player:"+playerScore);
+}
+game();
