@@ -49,13 +49,14 @@ function playRound(){
         }
     } 
 }  
-let playerScore = 0;
+let playerScore = 0; /*setting the scoreboard*/
 let pcScore = 0;
-function game(){
-    for(let i = 0; i<5;i++){
+
+function game(){ /*the game function*/
+    for(let i = 0; i<5;i++){ /*5 round game*/
         playRound();
-        if (result === "win"){
-            playerScore++;
+        if (result === "win"){ /*if you win*/
+            playerScore++; /*increase the player score*/
             console.log("You win!");            
         }
         else if (result === "loss"){
@@ -66,6 +67,18 @@ function game(){
             console.log("it's a draw!");
         }
     }
-    console.log("pc:"+pcScore, "player:"+playerScore);
+    if (playerScore>pcScore){
+        console.log("pc:"+pcScore, "player:"+playerScore);
+        console.log("you won!");
+
+    }
+    else if (playerScore<pcScore){
+        console.log("pc:"+pcScore, "player:"+playerScore);
+        console.log("you loss!");
+    }
+    else{
+        console.log("it's a draw!");
+    }
+    
 }
 game();
