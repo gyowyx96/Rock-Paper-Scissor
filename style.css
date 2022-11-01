@@ -1,5 +1,5 @@
 *{
-    background-color: green;
+    background-color: rgb(129, 34, 5);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
     
@@ -32,9 +32,27 @@ body{
     padding: 8px;
     background-color: blue;
     color: white;
-    font-size: 36px;
+    font-size: 50px;
     margin-top: 200px;
     display: flex;
     flex-direction: column;
+    border-radius: 15px;
+    border: 2px solid white;
+    align-items: center;
 
+}
+h4{
+    padding: 4px;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    width: fit-content;
+}
+
+h2{
+    padding: 8px;
+    color: white;
+    border-radius: 10px;
+    font-size: 32px;
+    width:fit-content;
 }

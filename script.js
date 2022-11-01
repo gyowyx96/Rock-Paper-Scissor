@@ -1,10 +1,16 @@
 let playerScore = 0; /*setting the scoreboard*/
 let pcScore = 0;
+let result = "";
+let round =0 ;
+
 const btn = document.querySelectorAll("button");
 
 const scoreboard = document.createElement("div");
 scoreboard.classList.add("score");
-scoreboard.textContent= "SCOREBOARD:  ";
+scoreboard.textContent= "SCOREBOARD";
+const h2 = document.createElement("h2");
+h2.textContent= "Round number: "+ round;
+scoreboard.appendChild(h2);
 const br = document.createElement("h4");
 br.textContent = "Pc: "+(pcScore);
 scoreboard.appendChild(br);
@@ -19,12 +25,19 @@ body.appendChild(scoreboard);
 
 btn.forEach((btn) => { //function that transform a button click 
     btn.addEventListener('click', () => {
-        console.log(btn.id);
+        round++;
+        h2.textContent= "Round number: "+ round;
+        if (round>=5){
+            alert("game over play another game!");
+            return btn.removeEventListener("click",);            
+        }
+
         const player = (btn.id); //into a player choice
         playRound(player);//and play a round
-
+        
     });
-});  
+}); 
+
 
 function getComputerChoice(){  
     let arr = [ "rock", "scissor", "paper"];/* create an array with the output we want to have*/
@@ -32,7 +45,7 @@ function getComputerChoice(){
     return pcOut;
  }
 
-let result = "";
+
 function playRound(player){
     const pc = getComputerChoice();
     
@@ -43,53 +56,25 @@ function playRound(player){
     }
     else{
         switch (player){ /*compare our input with the pc output and choose the winner*/
-            case "rock": pc === "paper" ? (result = "loss", console.log("rock is beaten by paper you suck!"))  
-                                        : (result = "win", console.log("you won against scissor! nice")); 
-            return (result);
+            case "rock": pc === "paper" ? (pcScore++, br.textContent = "Pc: "+(pcScore), console.log("rock is beaten by paper you suck!")) //give results and update scoreboard 
+                                        : (playerScore++, br1.textContent = "Player: "+(playerScore) , console.log("you won against scissor! nice")); 
+            
             break;
         
-            case "paper": pc === "scissor" ? (result = "loss", console.log("paper loose against scissor! defeat"))  
-                                           : (result = "win", console.log("paper beat rock nice,you won!")); 
-            return (result);
+            case "paper": pc === "scissor" ? (pcScore++, br.textContent = "Pc: "+(pcScore), console.log("paper loose against scissor! defeat"))  
+                                           : (playerScore++,br1.textContent = "Player: "+(playerScore), console.log("paper beat rock nice,you won!")); 
+            
             break;
 
-            case "scissor": pc === "rock" ? (result = "loss", console.log("scissor loose against rock, you are retarded!"))  
-                                          : (result = "win", console.log("scissor cut paper you won!")); 
-            return (result);
+            case "scissor": pc === "rock" ? (pcScore++, br.textContent = "Pc: "+(pcScore), console.log("scissor loose against rock, you are retarded!"))  
+                                          : (playerScore++, br1.textContent = "Player: "+(playerScore), console.log("scissor cut paper you won!")); 
+            
             break;    
         }
     } 
 }  
 
-function game(){ /*the game function*/
-    for(let i = 0; i<5;i++){ /*5 round game*/
-        if (result === "win"){ /*if you win*/
-            playerScore++; /*increase the player score*/           
-        }
-        else if (result === "loss"){
-            pcScore++;
-        }
-        else  {
-            pcScore++;
-            playerScore++;
-        }        
-    }
-    endGame();    
-}
 
-
-
-function endGame(){
-    if (playerScore > pcScore){
-        console.log(("pc:"+pcScore), ("player:"+playerScore));
-        return console.log("you won!");
-
-    }
-    else if (playerScore < pcScore){
-        console.log(("pc:" + pcScore), ("player:"+playerScore));
-        console.log("you loss!");
-    }
-}
 
 
 
